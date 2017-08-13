@@ -1,0 +1,5 @@
+hooks:
+  AfterInstall:
+    - location: deploy_hooks/hook-afterinstall.sh
+  ApplicationStart:
+    - location: deploy_hooks/hook-applicationstart.sh
