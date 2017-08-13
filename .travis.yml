@@ -9,6 +9,9 @@ cache:
 script:
   - npm run test
 
+notifications:
+  slack: codeforaustralia:1wsYbJH113J8NYM5skthvPuW
+
 deploy:
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY
