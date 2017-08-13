@@ -1,3 +1,14 @@
+version: 0.0
+
+os: linux
+
+files:
+  - source: ./
+    destination: /home/ubuntu/app-playground
+permissions:
+  - object: /
+    pattern: "**"
+    owner: ubuntu
 hooks:
   AfterInstall:
     - location: deploy_hooks/hook-afterinstall.sh
