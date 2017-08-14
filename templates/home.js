@@ -9,7 +9,7 @@ module.exports = home
 function home (state, emit) {
   var style = css`
     :host {
-      background-color: pink;
+      background-color: #3399ff;
       color: white;
     }
   `
