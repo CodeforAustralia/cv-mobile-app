@@ -1,7 +1,39 @@
 module.exports = function (state, emitter) {
+  initialise()
 
-  emitter.on('updateName', function (data) {
-    state.name = data
+  function initialise () {
+    state.user = {
+      email: '',
+      password: ''
+    }
+
+    state.error = {
+      bool: false,
+      text: ''
+    }
+
+    state.loading = false
+  }
+
+  emitter.on('updateInput', function (data) {
+    var prop = data.id
+    var value = data.text
+
+    state.user[prop] = value
+  })
+
+  emitter.on('error', function (data) {
+    state.error = {bool: true, text: data}
+    emitter.emit('render')
+  })
+
+  emitter.on('errorClear', function (data) {
+    state.error = {bool: false, text: ''}
+    emitter.emit('render')
+  })
+
+  emitter.on('toggleLoading', function () {
+    state.loading = !state.loading
     emitter.emit('render')
   })
 }

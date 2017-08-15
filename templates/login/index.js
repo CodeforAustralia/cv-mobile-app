@@ -1,15 +1,25 @@
 // TODO
 // styling
 // placeholders
+
 // require dependencies
 var html = require('choo/html')
 var css = require('sheetify')
+
+// import templates
+var error = require('../error')
+var spinner = require('../spinner')
 
 // export module
 module.exports = login
 
 // declare templates
 function login (state, emit) {
+  var email = state.user.email
+  var password = state.user.password
+
+  var loading = state.loading
+
   var style = css`
     :host {
       background-color: #3399ff;
@@ -27,6 +37,7 @@ function login (state, emit) {
       </div>
       <div>
         ${loading ? spinner() : html`<button class="submit" onclick=${submit}>Log In</button>`}
+        ${error(state, emit)}
       </div>
       <div>
         <a href="/forgottenPassword">I forgot my password</a>
@@ -34,4 +45,31 @@ function login (state, emit) {
     </div>
   `
   
+  function updateInput (e) {
+    var id = e.target.id
+    var text = e.target.value
+
+    emit('updateInput', {id: id, text: text})
+  }
+
+  function submit (e) {
+    var email = state.user.email
+
+    emit('toggleLoading')
+
+// toy validation
+    setTimeout(function () {
+      emit('toggleLoading')
+
+      if (email === 'reset@test.net') {
+        emit('errorClear')
+        emit('pushState', '/resetPassword')
+      } else if (email !== 'success@test.net') {
+        emit('error', 'The email address or password you have entered is incorrect, please try again')
+      } else {
+        emit('errorClear')
+        emit('pushState', '/home')
+      }
+    }, 1000)
+  }
 }
