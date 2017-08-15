@@ -1,3 +1,6 @@
+// TODO
+// styling
+
 // require dependencies
 var html = require('choo/html')
 var css = require('sheetify')
@@ -16,12 +19,7 @@ function home (state, emit) {
 
   return html`
     <div class=${style}>
-      <div>Hello ${state.name}</div>
-      <button onclick=${onclick}>Update name!</button>
+      <h2>There is where you will request a password reset</h2>
     </div>
-  `
-
-  function onclick () {
-    emit('updateName', 'Sam')
-  }
+    `
 }
