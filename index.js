@@ -8,7 +8,7 @@ var app = choo()
 app.use(require('./state'))
 
 // declare routes
-app.route('/', require('./templates/home'))
+app.route('/', require('./templates/login'))
 
 // start app
 document.body.appendChild(app.start())
