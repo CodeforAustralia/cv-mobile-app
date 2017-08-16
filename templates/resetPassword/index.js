@@ -1,7 +1,3 @@
-// TODO
-// styling
-// submission
-
 // require dependencies
 var html = require('choo/html')
 
@@ -21,7 +17,7 @@ function home (state, emit) {
   return html`
     <div>
       <div class="banner"></div>
-      <div id="resetMessage">this is your first time logging in. please reset your password</div>
+      <div class="message">this is your first time logging in. please reset your password</div>
       <div class="form-field">
         <input type="password" id="password" placeholder="password" value=${password} oninput=${updateInput} />
       </div>

@@ -13,6 +13,7 @@ module.exports = function (state, emitter) {
     }
 
     state.loading = false
+    state.passwordResetSubmitted = false
   }
 
   emitter.on('updateInput', function (data) {
@@ -24,6 +25,11 @@ module.exports = function (state, emitter) {
 
   emitter.on('updatePassword', function (data) {
     state.user.password = data
+  })
+
+  emitter.on('passwordReset', function () {
+    state.passwordResetSubmitted = true
+    emitter.emit('render')
   })
 
   emitter.on('error', function (data) {
