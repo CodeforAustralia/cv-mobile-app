@@ -42,7 +42,7 @@ function login (state, emit) {
 
   function updateInput (e) {
     var id = e.target.id
-    var text = e.target.value
+    var text = e.target.value.toLowerCase()
 
     emit('updateInput', {id: id, text: text})
   }
@@ -56,10 +56,10 @@ function login (state, emit) {
     setTimeout(function () {
       emit('toggleLoading')
 
-      if (email.toLowerCase() === 'reset@test.net') {
+      if (email === 'reset@test.net') {
         emit('errorClear')
         emit('pushState', '/resetPassword')
-      } else if (email.toLowerCase() !== 'success@test.net') {
+      } else if (email !== 'success@test.net') {
         emit('error', `the email address or password you've entered is incorrect, please try again (hint: try success@test.net or reset@test.net)`)
       } else {
         emit('errorClear')

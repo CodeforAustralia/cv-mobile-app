@@ -16,6 +16,7 @@
 input[type=text], input[type=password] {
   border: 0px;
   border-bottom: 1px solid black;
+  border-radius: 0;
   font-size: 20px;
   margin-left: 10%;
   width: 80%;
@@ -41,9 +42,9 @@ button {
   color: #EBEBE9;
   font-size: 20px;
   height: 2.5rem;
-  margin-left: 15%;
+  margin-left: 10%;
   margin-bottom: 1rem;
-  width: 70%;
+  width: 80%;
 }
 
 .submit { background-color: #C0CEB2; }
@@ -78,5 +79,6 @@ a {
   font-size: 14px;
   margin-bottom: 1rem;
   margin-left: 10%;
+  text-align: center;
   width: 80%;
 }
