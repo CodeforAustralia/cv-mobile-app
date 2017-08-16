@@ -21,7 +21,7 @@ function home (state, emit) {
   return html`
     <div>
       <div class="banner"></div>
-      <span>this is your first time logging in. please reset your password</span>
+      <div id="resetMessage">this is your first time logging in. please reset your password</div>
       <div class="form-field">
         <input type="password" id="password" placeholder="password" value=${password} oninput=${updateInput} />
       </div>
@@ -51,7 +51,9 @@ function home (state, emit) {
     setTimeout(function () {
       emit('toggleLoading')
 
-      if (password === confirmPassword) {
+      if (password === '') {
+        emit('error', 'you must enter a new password')
+      } else if (password === confirmPassword) {
         emit('updatePassword', password)
         emit('errorClear')
         emit('pushState', '/home')
