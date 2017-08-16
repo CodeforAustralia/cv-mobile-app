@@ -56,10 +56,10 @@ function login (state, emit) {
     setTimeout(function () {
       emit('toggleLoading')
 
-      if (email === 'reset@test.net') {
+      if (email.toLowerCase() === 'reset@test.net') {
         emit('errorClear')
         emit('pushState', '/resetPassword')
-      } else if (email !== 'success@test.net') {
+      } else if (email.toLowerCase() !== 'success@test.net') {
         emit('error', `the email address or password you've entered is incorrect, please try again (hint: try success@test.net or reset@test.net)`)
       } else {
         emit('errorClear')
