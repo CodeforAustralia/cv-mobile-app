@@ -22,6 +22,10 @@ module.exports = function (state, emitter) {
     state.user[prop] = value
   })
 
+  emitter.on('updatePassword', function (data) {
+    state.user.password = data
+  })
+
   emitter.on('error', function (data) {
     state.error = {bool: true, text: data}
     emitter.emit('render')
