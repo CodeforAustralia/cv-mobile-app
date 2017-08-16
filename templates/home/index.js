@@ -6,7 +6,6 @@ module.exports = home
 
 // declare templates
 function home (state, emit) {
-
   return html`
     <div>
       <div class="banner"></div>
