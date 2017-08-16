@@ -1,11 +1,15 @@
 // require dependencies
 var choo = require('choo')
+var css = require('sheetify')
 
 // initialise app
 var app = choo()
 
 // declare state
 app.use(require('./state'))
+
+// import stylesheets
+css('./assets/style.css')
 
 // declare routes
 app.route('/', require('./templates/login'))

@@ -1,10 +1,5 @@
-// TODO
-// styling
-// placeholders
-
 // require dependencies
 var html = require('choo/html')
-var css = require('sheetify')
 
 // import templates
 var error = require('../error')
@@ -17,88 +12,10 @@ module.exports = login
 function login (state, emit) {
   var email = state.user.email
   var password = state.user.password
-
   var loading = state.loading
 
-  var style = css`
-    :host {
-      font-family: Arial;
-      font-size: 20px;
-    }
-
-    :host > .banner {
-      background-color: #49654C;
-      height: 4rem;
-      margin-bottom: 1rem;
-    }
-
-    .form-field {
-      margin-bottom: 1rem;
-    }
-
-    input[type=text], input[type=password] {
-      border: 0px;
-      border-bottom: 1px solid black;
-      font-size: 20px;
-      margin-left: 10%;
-      width: 80%;
-    }
-
-    .wrapper {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      text-align: center;
-    }
-
-    input[type=checkbox] {
-      height: 20px;
-      vertical-align: middle;
-      width: 20px;
-    }
-
-    button {
-      background-color: #8AA989;
-      border: none;
-      border-radius: 2px;
-      color: #EBEBE9;
-      font-size: 20px;
-      height: 2.5rem;
-      margin-left: 15%;
-      margin-bottom: 1rem;
-      width: 70%;
-    }
-
-    .submit { background-color: #C0CEB2; }
-
-    a {
-      color: white;
-      text-decoration: none;
-    }
-
-    .warning {
-      display: flex;
-      justify-content: centre;
-      margin-left: 10%;
-      width: 80%;
-    }
-
-    .warning > p {
-      font-size: 14px;
-      margin: 0;
-      margin-bottom: 1rem;
-    }
-
-    .spinner {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      margin-bottom: 2rem;
-    }
-  `
-
   return html`
-    <div class=${style}>
+    <div>
       <div class="banner"></div>
       <div class="form-field">
         <input type="text" id="email" value=${email} placeholder="email address" oninput=${updateInput} />

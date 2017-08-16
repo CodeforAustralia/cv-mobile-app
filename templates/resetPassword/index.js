@@ -1,25 +1,27 @@
 // TODO
 // styling
+// basic html
+// submission
 
 // require dependencies
 var html = require('choo/html')
-var css = require('sheetify')
 
 // export module
 module.exports = home
 
 // declare templates
 function home (state, emit) {
-  var style = css`
-    :host {
-      background-color: #3399ff;
-      color: white;
-    }
-  `
-
   return html`
-    <div class=${style}>
-      <h2>There is where you will reset your password</h2>
+    <div>
+      <div class="banner"></div>
+      <span>this is your first time logging in. please reset your password</span>
+      <div class="form-field">
+        <input type="password" id="password" placeholder="password" />
+      </div>
+      <div class="form-field">
+        <input type="password" id="confirmPassword" placeholder="confirm password" />
+      </div>
+      <button class="submit">submit</button>
     </div>
     `
 }
