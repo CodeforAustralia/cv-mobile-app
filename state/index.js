@@ -14,9 +14,4 @@ module.exports = function (state, emitter) {
       seenDate: '2017-09-15 10:45:00'
     }]
   }
-
-  // emitter.on('updateContent', function(data) {
-  //   state.content = data
-  //   emitter.emit('render')
-  // })
 }

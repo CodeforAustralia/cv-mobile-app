@@ -10,7 +10,6 @@ app.use(reload())
 app.use(require('./state'))
 
 // import stylesheets
-// css('./assets/style.css')
 
 // declare routes
 app.route('/', require('./templates/home'))
