@@ -1,21 +1,19 @@
 // require dependencies
 var choo = require('choo')
-var css = require('sheetify')
+var reload = require('choo-reload')
 
 // initialise app
 var app = choo()
+app.use(reload())
 
 // declare state
 app.use(require('./state'))
 
 // import stylesheets
-css('./assets/style.css')
+// css('./assets/style.css')
 
 // declare routes
-app.route('/', require('./templates/login'))
-app.route('/home', require('./templates/home'))
-app.route('/resetPassword', require('./templates/resetPassword'))
-app.route('/forgottenPassword', require('./templates/forgottenPassword'))
+app.route('/', require('./templates/home'))
 
 // start app
 document.body.appendChild(app.start())

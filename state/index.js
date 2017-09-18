@@ -2,48 +2,21 @@ module.exports = function (state, emitter) {
   initialise()
 
   function initialise () {
-    state.user = {
-      email: '',
-      password: ''
-    }
-
-    state.error = {
-      bool: false,
-      text: ''
-    }
-
-    state.loading = false
-    state.passwordResetSubmitted = false
+    state.messages = [{
+      content: 'Hi Dave, you have a meeting at 10am tomorrow (Monday), 21st August with Sharon at Ballarat CCS, 206 Mair Street.',
+      outbound: false,
+      receivedOrSentDate: '2017-09-15 09:00:00',
+      seenDate: '2017-09-15 10:30:00'
+    }, {
+      content: 'OK',
+      outbound: true,
+      receivedOrSentDate: '2017-09-15 10:45:00',
+      seenDate: '2017-09-15 10:45:00'
+    }]
   }
 
-  emitter.on('updateInput', function (data) {
-    var prop = data.id
-    var value = data.text
-
-    state.user[prop] = value
-  })
-
-  emitter.on('updatePassword', function (data) {
-    state.user.password = data
-  })
-
-  emitter.on('passwordReset', function () {
-    state.passwordResetSubmitted = true
-    emitter.emit('render')
-  })
-
-  emitter.on('error', function (data) {
-    state.error = {bool: true, text: data}
-    emitter.emit('render')
-  })
-
-  emitter.on('errorClear', function (data) {
-    state.error = {bool: false, text: ''}
-    emitter.emit('render')
-  })
-
-  emitter.on('toggleLoading', function () {
-    state.loading = !state.loading
-    emitter.emit('render')
-  })
+  // emitter.on('updateContent', function(data) {
+  //   state.content = data
+  //   emitter.emit('render')
+  // })
 }

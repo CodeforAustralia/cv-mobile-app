@@ -24,7 +24,8 @@
     "choo": "^6.0.0",
     "express": "^4.15.4",
     "pm2": "^2.6.1",
-    "sheetify": "^6.1.1"
+    "sheetify": "^6.1.1",
+    "twilio": "^3.6.4"
   },
   "devDependencies": {
     "bankai": "^8.1.1",
