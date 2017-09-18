@@ -14,4 +14,14 @@ module.exports = function (state, emitter) {
       seenDate: '2017-09-15 10:45:00'
     }]
   }
+
+  emitter.on('DOMContentLoaded', function () {
+    state.messages.map(function (message, index) {
+      if (message.outbound) {
+        document.getElementById(`message${index}`).parentElement.classList.add('outbound')
+      } else {
+        document.getElementById(`message${index}`).parentElement.classList.add('inbound')
+      }
+    })
+  })
 }

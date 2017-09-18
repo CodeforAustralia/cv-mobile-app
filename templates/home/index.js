@@ -13,7 +13,7 @@ function home (state, emit) {
     :host {
       background-color: #f4f4f4;
       display: flex;
-      font-family: Freesans Medium;
+      font-family: Helvetica;
       flex-direction: column;
       height: 100vh;
     }
@@ -40,15 +40,19 @@ function home (state, emit) {
 
   return html`
     <container class=${style}>
-
-      <div class="inbound">
-        <div>${messages[0].content}</div>
-      </div>
-
-      <div class="outbound">
-        <div>${messages[1].content}</div>
-      </div>
+      ${displayMessages()}
     </container>`
+
+  function displayMessages () {
+    return state.messages.map(function (message, index) {
+      return html`
+        <div>
+          <div id="message${index}">
+            ${message.content}
+          </div>
+      </div>`
+    })
+  }
 
   // function testAPI () {
   //   api(function (data) {

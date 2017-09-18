@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "bankai build index.js public/dist",
-    "clean": "pm2 delete -s app || :",
-    "go": "pm2 start public/index.js --name=app",
+    "local": "bankai index.js",
     "start": "bankai index.js -p 3000 -A 172.31.4.90",
     "test": "standard"
   },
