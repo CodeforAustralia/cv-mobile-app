@@ -10,8 +10,8 @@ module.exports = function (state, emitter) {
     }, {
       content: 'OK',
       outbound: true,
-      receivedOrSentDate: '2017-09-15 10:45:00',
-      seenDate: '2017-09-15 10:45:00'
+      receivedOrSentDate: '2017-09-15 18:45:00',
+      seenDate: '2017-09-15 18:45:00'
     }]
   }
 

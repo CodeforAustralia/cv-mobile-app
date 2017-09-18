@@ -18,23 +18,38 @@ function home (state, emit) {
       height: 100vh;
     }
 
-    div {
+    :host > div > div {
       border-radius: 5px;
-      margin: 0.5rem;
+      margin: 0.2rem 0.5rem 0.5rem 0.5rem;
+      max-width: 60vw;
+      padding: 0.5rem;
     }
 
-    .inbound {
+    :host > div {
+    }
+
+    p {
+      color: #6f6e75;
+      font-size: 0.75rem;
+      margin: 0.5rem;
+      margin-bottom: 0;
+    }
+
+    .inbound > div {
       background-color: #e4e4e4;
       color: #6f6e75;
-      max-width: 60vw;
     }
 
     .outbound {
+      float: right;
+      text-align: right;
+    }
+
+    .outbound > div {
       background-color: #ffffff;
       color: #4e4d56;
-      margin-left: auto;
+      float: right;
       text-align: right;
-      max-width: 60vw;
     }
   `
 
@@ -45,12 +60,16 @@ function home (state, emit) {
 
   function displayMessages () {
     return state.messages.map(function (message, index) {
+      var myDate = new Date(message.receivedOrSentDate)
+
       return html`
         <div>
+          <p>Sent ${myDate.toLocaleString([], {hour: '2-digit', minute: '2-digit', hour12: true})}</p>
           <div id="message${index}">
             ${message.content}
           </div>
-      </div>`
+        </div>
+      `
     })
   }
 
