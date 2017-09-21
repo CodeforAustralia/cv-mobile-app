@@ -13,8 +13,6 @@ function home (state, emit) {
   return base(reminders, 'Reminders')
 
   function reminders () {
-    var messages = state.messages
-
     var style = css`
       :host {
         background-color: #f4f4f4;
@@ -76,7 +74,6 @@ function home (state, emit) {
 
   function displayMessages () {
     return state.messages.map(function (message, index) {
-
       return html`
         <div>
           ${displayTime(message, index)}
@@ -101,7 +98,7 @@ function home (state, emit) {
       var prevMsgDate = new Date(state.messages[index - 1].receivedOrSentDate)
 
       if (prevMsgDate.toDateString() === myDate.toDateString()) {
-        newDayDisplay = false;
+        newDayDisplay = false
       }
     }
 
@@ -124,6 +121,5 @@ function home (state, emit) {
 
       return html`<p>${timeToDisplay} ${myDate.toLocaleString([], timeDisplayOptions)}</p>`
     }
-
   }
 }

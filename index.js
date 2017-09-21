@@ -12,7 +12,7 @@ app.use(require('./state'))
 // import stylesheets
 
 // declare routes
-app.route('/', require('./templates/home'))
+app.route('/', require('./templates/reminders'))
 
 // start app
 document.body.appendChild(app.start())

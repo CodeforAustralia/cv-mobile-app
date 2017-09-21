@@ -4,7 +4,6 @@ var css = require('sheetify')
 
 // navigation template
 module.exports = function (title) {
-
   var style = css`
     :host {
       display: flex;
