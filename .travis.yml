@@ -19,7 +19,7 @@ deploy:
     local_dir: upload
     skip_cleanup: true
     on:
-      repo: georgiah/app-playground
+      repo: CodeforAustralia/cv-mobile-app
     bucket: app-playground-storage
     region: ap-southeast-2
   - provider: codedeploy
@@ -32,7 +32,7 @@ deploy:
     deployment_group: playground
     region: ap-southeast-2
     on:
-      repo: georgiah/app-playground
+      repo: CodeforAustralia/cv-mobile-app
 
 script:
   - zip -r latest * -x node_modules/\*
