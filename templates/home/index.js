@@ -2,73 +2,77 @@
 var html = require('choo/html')
 var css = require('sheetify')
 
+// import templates
+var base = require('../base')
+
 // export module
 module.exports = home
 
 // declare templates
 function home (state, emit) {
-  var messages = state.messages
+  return base(reminders, 'Reminders')
 
-  var style = css`
-    :host {
-      background-color: #f4f4f4;
-      display: flex;
-      font-family: Helvetica;
-      flex-direction: column;
-      height: 100vh;
-    }
+  function reminders () {
+    var messages = state.messages
 
-    :host > div > div {
-      border-radius: 5px;
-      margin: 0.2rem 0.5rem 0.5rem 0.5rem;
-      max-width: 60vw;
-      padding: 0.5rem 0.75rem;
-    }
+    var style = css`
+      :host {
+        background-color: #f4f4f4;
+        display: flex;
+        font-family: Helvetica;
+        flex-direction: column;
+        height: 100vh;
+      }
 
-    :host > div {
-    }
+      :host > div > div {
+        border-radius: 5px;
+        margin: 0.2rem 0.5rem 0.5rem 0.5rem;
+        max-width: 60vw;
+        padding: 0.5rem 0.75rem;
+      }
 
-    .newDate {
-      margin: 0;
-      text-align: center;
-      width: 100%;
-    }
+      .newDate {
+        margin: 0;
+        text-align: center;
+        width: 100%;
+      }
 
-    p {
-      color: #6f6e75;
-      font-size: 0.7rem;
-      margin: 0 0.5rem;
-      width: max-content;
-    }
+      p {
+        color: #6f6e75;
+        font-size: 0.7rem;
+        margin: 0 0.5rem;
+        width: max-content;
+      }
 
-    .inbound > div {
-      background-color: #e4e4e4;
-      color: #6f6e75;
-      width: max-content;
-    }
+      .inbound > div {
+        background-color: #e4e4e4;
+        color: #6f6e75;
+        width: max-content;
+      }
 
-    .outbound {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      text-align: right;
-    }
+      .outbound {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: right;
+      }
 
-    .outbound > * {
-      align-self: flex-end;
-    }
+      .outbound > * {
+        align-self: flex-end;
+      }
 
-    .outbound > div {
-      background-color: #ffffff;
-      color: #4e4d56;
-      width: max-content;
-    }
-  `
+      .outbound > div {
+        background-color: #ffffff;
+        color: #4e4d56;
+        width: max-content;
+      }
+    `
 
-  return html`
-    <container class=${style}>
-      ${displayMessages()}
-    </container>`
+    return html`
+      <content class=${style}>
+        ${displayMessages()}
+      </content>`
+  }
 
   function displayMessages () {
     return state.messages.map(function (message, index) {
