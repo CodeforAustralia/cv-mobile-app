@@ -22,34 +22,46 @@ function home (state, emit) {
       border-radius: 5px;
       margin: 0.2rem 0.5rem 0.5rem 0.5rem;
       max-width: 60vw;
-      padding: 0.5rem;
+      padding: 0.5rem 0.75rem;
     }
 
     :host > div {
     }
 
+    .newDate {
+      margin: 0;
+      text-align: center;
+      width: 100%;
+    }
+
     p {
       color: #6f6e75;
-      font-size: 0.75rem;
-      margin: 0.5rem;
-      margin-bottom: 0;
+      font-size: 0.7rem;
+      margin: 0 0.5rem;
+      width: max-content;
     }
 
     .inbound > div {
       background-color: #e4e4e4;
       color: #6f6e75;
+      width: max-content;
     }
 
     .outbound {
-      float: right;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       text-align: right;
+    }
+
+    .outbound > * {
+      align-self: flex-end;
     }
 
     .outbound > div {
       background-color: #ffffff;
       color: #4e4d56;
-      float: right;
-      text-align: right;
+      width: max-content;
     }
   `
 
@@ -60,11 +72,10 @@ function home (state, emit) {
 
   function displayMessages () {
     return state.messages.map(function (message, index) {
-      var myDate = new Date(message.receivedOrSentDate)
 
       return html`
         <div>
-          <p>Sent ${myDate.toLocaleString([], {hour: '2-digit', minute: '2-digit', hour12: true})}</p>
+          ${displayTime(message, index)}
           <div id="message${index}">
             ${message.content}
           </div>
@@ -73,13 +84,42 @@ function home (state, emit) {
     })
   }
 
-  // function testAPI () {
-  //   api(function (data) {
-  //     emit('updateContent', data)
-  //   })
-  // }
-}
+  function displayTime (message, index) {
+    var myDate = new Date(message.receivedOrSentDate)
+    var today = new Date()
 
-      // <p>Test API call</p>
-      // <button onclick=${testAPI}>Test</div>
-      // ${content ? html`<p>${content}</p>` : null}
+    var newDayDisplay = true
+
+    var timeToDisplay = ''
+    var timeDisplayOptions = {hour: '2-digit', minute: '2-digit', hour12: true}
+
+    if (index !== 0) {
+      var prevMsgDate = new Date(state.messages[index - 1].receivedOrSentDate)
+
+      if (prevMsgDate.toDateString() === myDate.toDateString()) {
+        newDayDisplay = false;
+      }
+    }
+
+    if (newDayDisplay) {
+      if (myDate.toDateString() === today.toDateString()) {
+        timeToDisplay = 'Today, '
+      } else {
+        timeDisplayOptions.weekday = 'short'
+        timeDisplayOptions.day = 'numeric'
+        timeDisplayOptions.month = 'short'
+      }
+
+      return html`<p class="newDate">${timeToDisplay} ${myDate.toLocaleString([], timeDisplayOptions)}</p>`
+    } else {
+      timeToDisplay = 'Sent '
+
+      if (message.messageType === 'SMS') {
+        timeToDisplay += 'via SMS at '
+      }
+
+      return html`<p>${timeToDisplay} ${myDate.toLocaleString([], timeDisplayOptions)}</p>`
+    }
+
+  }
+}
