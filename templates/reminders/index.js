@@ -95,6 +95,15 @@ function home (state, emit) {
         font-size: 2rem;
         margin-left: 0.5rem;
       }
+
+      button {
+        border: 2px solid white;
+        color: #6f6e75;
+        font-size: 1rem;
+        margin: 0.5rem 5% 0rem 5%;
+        padding: 0.5rem;
+        width: 90%;
+      }
     `
 
     return html`
@@ -113,17 +122,33 @@ function home (state, emit) {
     return state.messages.map(function (message, index) {
       return html`
       <div>
-        ${message.outbound ?
-          html`<div class="outbound">
+        ${message.outbound
+          ? html`<div class="outbound">
                 ${displayTime(message, index)}
                 <div class="message">${message.content}</div>
-                </div>` :
-          html`<div class="inbound">
+                </div>`
+          : html`<div class="inbound">
                 ${displayTime(message, index)}
-                <div class="message">${message.content}</div>
-                </div>`}
+                <div class="message">
+                  ${message.content}
+                  ${message.response ? displayResponse() : null}
+                </div>
+              </div>`}
       </div>`
     })
+  }
+
+  function displayResponse () {
+    return html`
+        <div>
+          <button id="OK" onclick=${sendResponse}>OK</button>
+          <button id="Reschedule" onclick=${sendResponse}>Reschedule</button>
+        </div>
+      `
+  }
+
+  function sendResponse (e) {
+    emit('sendResponse', e.target.id)
   }
 
   function displayTime (message, index) {
