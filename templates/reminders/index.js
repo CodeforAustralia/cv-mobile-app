@@ -3,6 +3,7 @@ var html = require('choo/html')
 var css = require('sheetify')
 
 // import templates
+var api = require('../../lib/api')
 var base = require('../base')
 
 // export module
@@ -19,7 +20,8 @@ function home (state, emit) {
         display: flex;
         font-family: Helvetica;
         flex-direction: column;
-        height: 100vh;
+        justify-content: center;
+        min-height: 100%;
       }
 
       .message {
@@ -40,12 +42,16 @@ function home (state, emit) {
         font-size: 0.7rem;
         margin: 0 0.5rem;
         width: max-content;
+        width: -moz-max-content;
+        width: -webkit-max-content;
       }
 
       .inbound > div {
         background-color: #e4e4e4;
         color: #6f6e75;
         width: max-content;
+        width: -moz-max-content;
+        width: -webkit-max-content;
       }
 
       .outbound {
@@ -63,6 +69,8 @@ function home (state, emit) {
         background-color: #fff;
         color: #4e4d56;
         width: max-content;
+        width: -moz-max-content;
+        width: -webkit-max-content;
       }
 
       input {
@@ -107,13 +115,19 @@ function home (state, emit) {
     `
 
     return html`
-      <content class=${style}>
+      <content class=${style} onload=${state.status ? null : queryAPI()}>
         ${displayMessages()}
         <div class="input">
           <input placeholder="Message ... " type="text" />
           <div> + </div>
         </div>
       </content>`
+  }
+
+  function queryAPI () {
+    api(function (data) {
+      emit('updateContent', data)
+    })
   }
 
   // look over this again - this code is hideous (quick hack solution)

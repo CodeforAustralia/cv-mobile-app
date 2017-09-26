@@ -2,40 +2,40 @@ module.exports = function (state, emitter) {
   initialise()
 
   function initialise () {
-    state.messages = [{
-      content: 'Hi Dave, you have a meeting at 10am tomorrow (Monday), 21st August with Sharon at Ballarat CCS, 206 Mair Street.',
-      outbound: false,
-      receivedOrSentDate: '2017-09-15 09:00:00',
-      response: true,
-      seenDate: '2017-09-15 10:30:00',
-      messageType: 'App'
-    }, {
-      content: 'OK',
-      outbound: true,
-      receivedOrSentDate: '2017-09-15 18:45:00',
-      response: false,
-      seenDate: '2017-09-15 18:45:00',
-      messageType: 'App'
-    }, {
-      content: 'Thanks for coming today Dave',
-      outbound: false,
-      receivedOrSentDate: '2017-09-21 09:05:00',
-      response: false,
-      seenDate: null,
-      messageType: 'App'
-    }, {
-      content: 'N',
-      outbound: true,
-      receivedOrSentDate: '2017-09-21 13:20:25',
-      response: false,
-      seenDate: null,
-      messageType: 'SMS'
-    }]
+    state.user = {
+      phone: ''
+    }
 
+    state.messages = new Array()
     state.status = false
 
     state.content = 'Hiya'
   }
+
+  emitter.on('updateContent', function (data) {
+    state.user.phone = data['Phones'][0]['PhoneNumber']
+
+    console.log(state.user.phone)
+
+    for (message of data['Messages']) {
+      var newMessage = {
+        content: message['MessageContents'],
+        receivedOrSentDate: message['DateDelivered'],
+        messageType: message['MessageType']
+      }
+
+      if (message['From'] === state.user.phone) {
+        newMessage.outbound = false
+      } else {
+        newMessage.outbound = true
+      }
+
+      state.messages.push(newMessage)
+    }
+
+    state.status = true
+    emitter.emit('render')
+  })
 
   emitter.on('sendResponse', function (data) {
     var today = new Date()
