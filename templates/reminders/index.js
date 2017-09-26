@@ -14,7 +14,7 @@ function home (state, emit) {
 
   function reminders () {
     var style = css`
-      :host {
+      content {
         background-color: #f4f4f4;
         display: flex;
         font-family: Helvetica;
@@ -22,7 +22,7 @@ function home (state, emit) {
         height: 100vh;
       }
 
-      :host > div > div {
+      .message {
         border-radius: 5px;
         margin: 0.2rem 0.5rem 0.5rem 0.5rem;
         max-width: 60vw;
@@ -60,28 +60,68 @@ function home (state, emit) {
       }
 
       .outbound > div {
-        background-color: #ffffff;
+        background-color: #fff;
         color: #4e4d56;
         width: max-content;
+      }
+
+      input {
+        align-self: center;
+        background-color: #e4e4e4;
+        border: none;
+        border-radius: 4px;
+        box-sizing: border-box;
+        height: 1.5rem;
+        padding: 0 0.5rem;
+        width: 80%;
+      }
+
+      .input {
+        background-color: #fff;
+        bottom: 0;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        position: fixed;
+        height: 2rem;
+        width: 100%;
+      }
+
+      .input > div {
+        align-self: center;
+        color: #6f6e75;
+        font-size: 1.5rem;
+        margin-left: 0.5rem;
       }
     `
 
     return html`
       <content class=${style}>
         ${displayMessages()}
+        <div class="input">
+          <input placeholder="Message ... " type="text" />
+          <div> + </div>
+        </div>
       </content>`
   }
+
+  // come back to
 
   function displayMessages () {
     return state.messages.map(function (message, index) {
       return html`
-        <div>
-          ${displayTime(message, index)}
-          <div id="message${index}">
-            ${message.content}
-          </div>
-        </div>
-      `
+      <div>
+        ${message.outbound ?
+          html`<div class="outbound">
+                ${displayTime(message, index)}
+                <div class="message">${message.content}</div>
+                </div>` :
+          html`<div class="inbound">
+                ${displayTime(message, index)}
+                <div class="message">${message.content}</div>
+                </div>`}
+      </div>`
     })
   }
 
