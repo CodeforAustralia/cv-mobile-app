@@ -29,13 +29,5 @@ module.exports = function (state, emitter) {
     }]
   }
 
-  emitter.on('DOMContentLoaded', function () {
-    state.messages.map(function (message, index) {
-      if (message.outbound) {
-        document.getElementById(`message${index}`).parentElement.classList.add('outbound')
-      } else {
-        document.getElementById(`message${index}`).parentElement.classList.add('inbound')
-      }
-    })
   })
 }

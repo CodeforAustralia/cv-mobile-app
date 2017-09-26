@@ -71,6 +71,7 @@ function home (state, emit) {
         border: none;
         border-radius: 4px;
         box-sizing: border-box;
+        font-size: 1rem;
         height: 1.5rem;
         padding: 0 0.5rem;
         width: 80%;
@@ -84,14 +85,14 @@ function home (state, emit) {
         flex-direction: row;
         justify-content: center;
         position: fixed;
-        height: 2rem;
+        height: 2.5rem;
         width: 100%;
       }
 
       .input > div {
         align-self: center;
         color: #6f6e75;
-        font-size: 1.5rem;
+        font-size: 2rem;
         margin-left: 0.5rem;
       }
     `
@@ -106,7 +107,7 @@ function home (state, emit) {
       </content>`
   }
 
-  // come back to
+  // look over this again - this code is hideous (quick hack solution)
 
   function displayMessages () {
     return state.messages.map(function (message, index) {
