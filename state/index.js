@@ -6,16 +6,33 @@ module.exports = function (state, emitter) {
       phone: ''
     }
 
-    state.messages = new Array()
+    state.messages = []
     state.status = false
 
     state.content = 'Hiya'
+
+    state.to = ''
+    state.from = ''
+    state.testMessage = ''
+    state.sent = false
   }
+
+  emitter.on('sendSMS', function () {
+    state.sent = true
+    console.log('rendering')
+    emitter.emit('render')
+  })
+
+  emitter.on('updateNewSMS', function (data) {
+    state[data.id] = data.text
+  })
 
   emitter.on('updateContent', function (data) {
     state.user.phone = data['Phones'][0]['PhoneNumber']
 
     console.log(state.user.phone)
+
+    var message
 
     for (message of data['Messages']) {
       var newMessage = {

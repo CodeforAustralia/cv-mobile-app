@@ -13,7 +13,7 @@ app.use(require('./state'))
 
 // declare routes
 app.route('/', require('./templates/reminders'))
-app.route('/test', require('./templates/testAPI'))
+app.route('/test', require('./templates/test'))
 
 // start app
 document.body.appendChild(app.start())
