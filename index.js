@@ -12,7 +12,8 @@ app.use(require('./state'))
 // import stylesheets
 
 // declare routes
-app.route('/', require('./templates/reminders'))
+app.route('/', require('./templates/home'))
+app.route('/reminders', require('./templates/reminders'))
 app.route('/test', require('./templates/test'))
 
 // start app
