@@ -19,7 +19,6 @@ module.exports = function (state, emitter) {
 
   emitter.on('sendSMS', function () {
     state.sent = true
-    console.log('rendering')
     emitter.emit('render')
   })
 

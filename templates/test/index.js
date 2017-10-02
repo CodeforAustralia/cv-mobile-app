@@ -42,7 +42,7 @@ function test (state, emit) {
   </div>`
 
   function sendSMS () {
-    emit('sentSMS')
+    emit('sendSMS')
     api({to: state.to, from: state.from, newMessage: state.testMessage}, function () {
     })
   }
