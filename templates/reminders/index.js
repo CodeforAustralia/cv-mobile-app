@@ -130,24 +130,16 @@ function home (state, emit) {
     })
   }
 
-  // look over this again - this code is hideous (quick hack solution)
-
   function displayMessages () {
+    var div
+
     return state.messages.map(function (message, index) {
       return html`
       <div>
-        ${message.outbound
-          ? html`<div class="outbound">
-                ${displayTime(message, index)}
-                <div class="message">${message.content}</div>
-                </div>`
-          : html`<div class="inbound">
-                ${displayTime(message, index)}
-                <div class="message">
-                  ${message.content}
-                  ${message.response ? displayResponse() : null}
-                </div>
-              </div>`}
+        <div class="${message.direction}">
+          ${displayTime(message, index)}
+          <div class="message">${message.content}</div>
+        </div>
       </div>`
     })
   }

@@ -42,9 +42,9 @@ module.exports = function (state, emitter) {
       }
 
       if (message['From'] === state.user.phone) {
-        newMessage.outbound = false
+        newMessage.direction = 'inbound'
       } else {
-        newMessage.outbound = true
+        newMessage.direction = 'outbound'
       }
 
       state.messages.push(newMessage)
