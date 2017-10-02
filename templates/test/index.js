@@ -52,5 +52,4 @@ module.exports = function (state, emit) {
 
     emit('updateNewSMS', {id: id, text: text})
   }
-
 }

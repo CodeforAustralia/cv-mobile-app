@@ -22,6 +22,7 @@ module.exports = function (state, emitter) {
   emitter.on('updateContent', function (data) {
     state.user.phone = data['Phones'][0]['PhoneNumber']
 
+    var message
     for (message of data['Messages']) {
       var newMessage = {
         content: message['MessageContents'],
