@@ -1,15 +1,14 @@
+// require dependencies
 var html = require('choo')
 var css = require('sheetify')
 
+// import templates
 var api = require('../../lib/testAPI')
 
-module.exports = test
-
-function test (state, emit) {
+module.exports = function (state, emit) {
   var to = state.to
   var from = state.from
   var message = state.testMessage
-
   var sent = state.sent
 
   var style = css`

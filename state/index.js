@@ -1,4 +1,5 @@
 module.exports = function (state, emitter) {
+  // run on app start
   initialise()
 
   function initialise () {
@@ -17,21 +18,9 @@ module.exports = function (state, emitter) {
     state.sent = false
   }
 
-  emitter.on('sendSMS', function () {
-    state.sent = true
-    emitter.emit('render')
-  })
-
-  emitter.on('updateNewSMS', function (data) {
-    state[data.id] = data.text
-  })
-
+  // declare bus handlers
   emitter.on('updateContent', function (data) {
     state.user.phone = data['Phones'][0]['PhoneNumber']
-
-    console.log(state.user.phone)
-
-    var message
 
     for (message of data['Messages']) {
       var newMessage = {
@@ -68,5 +57,14 @@ module.exports = function (state, emitter) {
     // also need to send to db
 
     emitter.emit('render')
+  })
+
+  emitter.on('sendSMS', function () {
+    state.sent = true
+    emitter.emit('render')
+  })
+
+  emitter.on('updateNewSMS', function (data) {
+    state[data.id] = data.text
   })
 }
