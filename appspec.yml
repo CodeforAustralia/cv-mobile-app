@@ -14,3 +14,5 @@ hooks:
     - location: deploy_hooks/hook-afterinstall.sh
   ApplicationStart:
     - location: deploy_hooks/hook-applicationstart.sh
+  BeforeInstall:
+    - location: deploy_hooks/hook-beforeinstall.sh
