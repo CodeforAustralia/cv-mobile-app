@@ -6,7 +6,7 @@
   "scripts": {
     "build": "bankai build index.js public/dist",
     "local": "bankai index.js",
-    "start": "bankai index.js -p 3000 -A 172.31.4.90",
+    "start": "bankai index.js -p 3000 -A 172.31.10.240",
     "test": "standard"
   },
   "repository": {
