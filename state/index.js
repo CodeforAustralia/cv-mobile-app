@@ -28,7 +28,8 @@ module.exports = function (state, emitter) {
         content: message['MessageContents'],
         receivedOrSentDate: message['DateDelivered'],
         messageType: message['MessageType'],
-        direction: message[`Outbound`] ? 'outbound' : 'inbound'
+        direction: message[`Outbound`] ? 'outbound' : 'inbound',
+        response: message[`ResponseRequired`]
       }
 
       state.messages.push(newMessage)
@@ -43,7 +44,7 @@ module.exports = function (state, emitter) {
 
     state.messages.push({
       content: data,
-      outbound: true,
+      direction: 'inbound',
       receivedOrSentDate: today.toString(),
       response: false,
       seenDate: today.toString(),

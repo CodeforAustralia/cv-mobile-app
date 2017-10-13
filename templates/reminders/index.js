@@ -35,7 +35,10 @@ module.exports = function (state, emit) {
       <div>
         <div class="${message.direction}">
           ${displayTime(message, index)}
-          <div class="message">${message.content}</div>
+          <div class="message">
+            ${message.content}
+            ${message.response ? displayResponse() : null}
+          </div>
         </div>
       </div>`
     })
@@ -43,18 +46,18 @@ module.exports = function (state, emit) {
 
   // display possible responses to inbound message
   // currently not working - needs template metadata
-  // function displayResponse () {
-  //   return html`
-  //       <div>
-  //         <button id="OK" onclick=${sendResponse}>OK</button>
-  //         <button id="Reschedule" onclick=${sendResponse}>Reschedule</button>
-  //       </div>
-  //     `
-  // }
-  //
-  // function sendResponse (e) {
-  //   emit('sendResponse', e.target.id)
-  // }
+  function displayResponse () {
+    return html`
+        <div>
+          <button id="OK" onclick=${sendResponse}>OK</button>
+          <button id="Reschedule" onclick=${sendResponse}>Reschedule</button>
+        </div>
+      `
+  }
+
+  function sendResponse (e) {
+    emit('sendResponse', e.target.id)
+  }
 
   function displayTime (message, index) {
     var myDate = new Date(message.receivedOrSentDate)
