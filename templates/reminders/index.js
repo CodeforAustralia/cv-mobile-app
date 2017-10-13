@@ -51,7 +51,7 @@ module.exports = function (state, emit) {
   //       </div>
   //     `
   // }
-  // 
+  //
   // function sendResponse (e) {
   //   emit('sendResponse', e.target.id)
   // }

@@ -27,13 +27,8 @@ module.exports = function (state, emitter) {
       var newMessage = {
         content: message['MessageContents'],
         receivedOrSentDate: message['DateDelivered'],
-        messageType: message['MessageType']
-      }
-
-      if (message['From'] === state.user.phone) {
-        newMessage.direction = 'inbound'
-      } else {
-        newMessage.direction = 'outbound'
+        messageType: message['MessageType'],
+        direction: message[`Outbound`] ? 'outbound' : 'inbound'
       }
 
       state.messages.push(newMessage)

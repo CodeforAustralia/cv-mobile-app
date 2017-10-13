@@ -7,7 +7,7 @@ content {
   min-height: 100%;
 }
 
-.inbound > div {
+.outbound > div {
   background-color: #e4e4e4;
   color: #6f6e75;
   width: max-content;
@@ -15,18 +15,18 @@ content {
   width: -webkit-max-content;
 }
 
-.outbound {
+.inbound {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   text-align: right;
 }
 
-.outbound > * {
+.inbound > * {
   align-self: flex-end;
 }
 
-.outbound > div {
+.inbound > div {
   background-color: #fff;
   color: #4e4d56;
   width: max-content;
