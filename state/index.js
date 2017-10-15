@@ -4,7 +4,9 @@ module.exports = function (state, emitter) {
 
   function initialise () {
     state.user = {
-      phone: ''
+      phone: '',
+      JAID: 111,
+      locationNumber: '61400868219'
     }
 
     state.messages = []
@@ -20,7 +22,9 @@ module.exports = function (state, emitter) {
 
   // declare bus handlers
   emitter.on('updateContent', function (data) {
-    state.user.phone = data['Phones'][0]['PhoneNumber']
+    state.user.phone = data['Phones'][0]['PhoneNumber'].substr(1)
+
+    state.messages = []
 
     var message
     for (message of data['Messages']) {
@@ -28,8 +32,8 @@ module.exports = function (state, emitter) {
         content: message['MessageContents'],
         receivedOrSentDate: message['DateDelivered'],
         messageType: message['MessageType'],
-        direction: message[`Outbound`] ? 'outbound' : 'inbound',
-        response: message[`ResponseRequired`]
+        direction: message[`Outbound`] === '1' ? 'outbound' : 'inbound',
+        response: message[`ResponseRequired`] === '1'
       }
 
       state.messages.push(newMessage)

@@ -24,7 +24,7 @@ module.exports = function (state, emit) {
 
   // pull message data from the API
   function queryAPI () {
-    api(function (data) {
+    api.getMessages({JAID: state.user.JAID}, function (data) {
       emit('updateContent', data)
     })
   }
@@ -56,7 +56,9 @@ module.exports = function (state, emit) {
   }
 
   function sendResponse (e) {
-    emit('sendResponse', e.target.id)
+    api.sendMessage({JAID: state.user.JAID, to: state.user.locationNumber, from: state.user.phone, content: e.target.id}, function () {
+      queryAPI()
+    })
   }
 
   function displayTime (message, index) {
