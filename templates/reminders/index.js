@@ -12,21 +12,34 @@ module.exports = function (state, emit) {
   return base(reminders, 'Reminders')
 
   function reminders () {
+    var newMessage = state.newMessage
+
     return html`
       <content class=${style} onload=${state.status ? null : queryAPI()}>
         ${displayMessages()}
         <div class="input">
-          <input placeholder="Message ... " type="text" id="foo" />
-          <div> + </div>
+          <input placeholder="Message ... " type="text" id="newMessage" value=${newMessage} oninput=${update} />
+          <div onclick=${sendNewMessage}> + </div>
         </div>
       </content>`
   }
 
+  function sendNewMessage () {
+    api.sendMessage({JAID: state.user.JAID, to: state.user.locationNumber, from: state.user.phone, content: state.newMessage}, function () {
+      queryAPI()
+      emit('clearNewMessage')
+    })
+  }
+
+  function update (e) {
+    var text = e.target.value
+    emit('updateNewMessage', {text: text})
+  }
+
   // pull message data from the API
   function queryAPI () {
-    console.log('queryAPI is running')
     api.getMessages({JAID: state.user.JAID}, function (data) {
-      setTimeout(function () { document.getElementById('foo').scrollIntoView() }, 10)
+      setTimeout(function () { document.getElementById('newMessage').scrollIntoView() }, 10)
       emit('updateContent', data)
     })
   }

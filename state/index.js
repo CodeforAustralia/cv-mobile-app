@@ -10,6 +10,8 @@ module.exports = function (state, emitter) {
     }
 
     state.messages = []
+
+    state.newMessage = ''
     state.status = false
 
     state.content = 'Hiya'
@@ -43,21 +45,12 @@ module.exports = function (state, emitter) {
     emitter.emit('render')
   })
 
-  emitter.on('sendResponse', function (data) {
-    var today = new Date()
+  emitter.on('clearNewMessage', function () {
+    state.newMessage = ''
+  })
 
-    state.messages.push({
-      content: data,
-      direction: 'inbound',
-      receivedOrSentDate: today.toString(),
-      response: false,
-      seenDate: today.toString(),
-      messageType: 'App'
-    })
-
-    // also need to send to db
-
-    emitter.emit('render')
+  emitter.on('updateNewMessage', function (data) {
+    state.newMessage = data.text
   })
 
   emitter.on('sendSMS', function () {
