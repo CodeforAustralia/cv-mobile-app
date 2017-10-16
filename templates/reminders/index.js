@@ -77,6 +77,8 @@ module.exports = function (state, emit) {
 
   function displayTime (message, index) {
     var myDate = new Date(message.receivedOrSentDate)
+    var localeAgnosticDate = new Date(0)
+    localeAgnosticDate.setUTCSeconds(myDate.valueOf())
     var today = new Date()
 
     var newDayDisplay = true
@@ -102,7 +104,7 @@ module.exports = function (state, emit) {
         timeDisplayOptions.month = 'short'
       }
 
-      return html`<p class="newDate">${timeToDisplay} ${myDate.toLocaleString([], timeDisplayOptions)}</p>`
+      return html`<p class="newDate">${timeToDisplay} ${localeAgnosticDate.toLocaleString([], timeDisplayOptions)}</p>`
     } else {
       timeToDisplay = 'Sent '
 
@@ -110,7 +112,7 @@ module.exports = function (state, emit) {
         timeToDisplay += 'via SMS at '
       }
 
-      return html`<p>${timeToDisplay} ${myDate.toLocaleString([], timeDisplayOptions)}</p>`
+      return html`<p>${timeToDisplay} ${localeAgnosticDate.toLocaleString([], timeDisplayOptions)}</p>`
     }
   }
 }
