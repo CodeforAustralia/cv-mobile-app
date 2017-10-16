@@ -16,7 +16,7 @@ module.exports = function (state, emit) {
       <content class=${style} onload=${state.status ? null : queryAPI()}>
         ${displayMessages()}
         <div class="input">
-          <input placeholder="Message ... " type="text" />
+          <input placeholder="Message ... " type="text" id="foo" />
           <div> + </div>
         </div>
       </content>`
@@ -24,7 +24,9 @@ module.exports = function (state, emit) {
 
   // pull message data from the API
   function queryAPI () {
+    console.log('queryAPI is running')
     api.getMessages({JAID: state.user.JAID}, function (data) {
+      setTimeout(function () { document.getElementById('foo').scrollIntoView() }, 10)
       emit('updateContent', data)
     })
   }
@@ -45,7 +47,6 @@ module.exports = function (state, emit) {
   }
 
   // display possible responses to inbound message
-  // currently not working - needs template metadata
   function displayResponse () {
     return html`
         <div>
