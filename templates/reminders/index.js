@@ -77,8 +77,8 @@ module.exports = function (state, emit) {
   }
 
   function displayTime (message, index) {
-    var myDate = new Date(message.receivedOrSentDate)
-    var today = new Date()
+    var myDate = moment(message.receivedOrSentDate)
+    var today = moment()
 
     var newDayDisplay = true
 
@@ -86,20 +86,16 @@ module.exports = function (state, emit) {
     var timeDisplayString = 'h:mm a'
 
     if (index !== 0) {
-      var prevMsgDate = new Date(state.messages[index - 1].receivedOrSentDate)
+      var prevMsgDate = moment(state.messages[index - 1].receivedOrSentDate)
 
-      if (prevMsgDate.toDateString() === myDate.toDateString()) {
+      if (prevMsgDate.format() === myDate.format()) {
         newDayDisplay = false
       }
     }
 
-    console.log(moment(today))
-    console.log(moment(today).format('ddd D MMM, h:mm a'))
-    console.log(moment(myDate))
-
     // if message was sent on a different day, display date in full
     if (newDayDisplay) {
-      if (myDate.toDateString() === today.toDateString()) {
+      if (myDate.format() === today.format()) {
         timeToDisplay = 'Today, '
       } else {
         timeDisplayString = 'ddd D MMM, h:mm a'
