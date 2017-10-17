@@ -1,6 +1,7 @@
 // require dependencies
 var html = require('choo/html')
 var css = require('sheetify')
+var moment = require('moment')
 
 // import templates
 var api = require('../../lib/api')
@@ -77,14 +78,12 @@ module.exports = function (state, emit) {
 
   function displayTime (message, index) {
     var myDate = new Date(message.receivedOrSentDate)
-    var localeAgnosticDate = new Date(0)
-    localeAgnosticDate.setUTCSeconds(myDate.valueOf())
     var today = new Date()
 
     var newDayDisplay = true
 
     var timeToDisplay = ''
-    var timeDisplayOptions = {hour: '2-digit', minute: '2-digit', hour12: true}
+    var timeDisplayString = 'h:mm a'
 
     if (index !== 0) {
       var prevMsgDate = new Date(state.messages[index - 1].receivedOrSentDate)
@@ -94,17 +93,19 @@ module.exports = function (state, emit) {
       }
     }
 
+    console.log(moment(today))
+    console.log(moment(today).format('ddd D MMM, h:mm a'))
+    console.log(moment(myDate))
+
     // if message was sent on a different day, display date in full
     if (newDayDisplay) {
       if (myDate.toDateString() === today.toDateString()) {
         timeToDisplay = 'Today, '
       } else {
-        timeDisplayOptions.weekday = 'short'
-        timeDisplayOptions.day = 'numeric'
-        timeDisplayOptions.month = 'short'
+        timeDisplayString = 'ddd D MMM, h:mm a'
       }
 
-      return html`<p class="newDate">${timeToDisplay} ${localeAgnosticDate.toLocaleString([], timeDisplayOptions)}</p>`
+      return html`<p class="newDate">${timeToDisplay} ${moment(myDate).format(timeDisplayString)}</p>`
     } else {
       timeToDisplay = 'Sent '
 
@@ -112,7 +113,7 @@ module.exports = function (state, emit) {
         timeToDisplay += 'via SMS at '
       }
 
-      return html`<p>${timeToDisplay} ${localeAgnosticDate.toLocaleString([], timeDisplayOptions)}</p>`
+      return html`<p>${timeToDisplay} ${moment(myDate).format(timeDisplayString)}</p>`
     }
   }
 }
