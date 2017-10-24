@@ -2,4 +2,9 @@
 
 cd /var/www/html/app-playground
 npm install
-screen -X -S orion quit
+rm stdout.txt
+rm stderr.txt
+
+cd /var/www/html/cv-staff-app
+rm stdout.txt
+rm stderr.txt
