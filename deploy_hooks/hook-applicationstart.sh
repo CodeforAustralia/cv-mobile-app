@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd /var/www/html/app-playground
-screen -d -m npm start
+screen -S orion -d -m npm start

@@ -4,7 +4,7 @@
   "description": "A sandbox to play with app prototypes",
   "main": "index.js",
   "scripts": {
-    "build": "bankai build index.js public/dist",
+    "build": "bankai build index.js public/",
     "local": "bankai index.js",
     "start": "bankai index.js -p 3000 -A 172.31.10.240",
     "test": "standard"
