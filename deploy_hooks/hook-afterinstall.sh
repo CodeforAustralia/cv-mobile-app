@@ -2,6 +2,7 @@
 
 cd /var/www/html/app-playground
 npm install
+pkill -9 node
 rm stdout.txt
 rm stderr.txt
 
